@@ -54,8 +54,16 @@ public class ForecastFragment extends android.support.v4.app.Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        new ForecastTask().execute("64285", "");
-        return true;
+        if (item.getItemId() == R.id.action_refresh) {
+            new ForecastTask().execute("64285", "");
+            return true;
+        }
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(getContext(), SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
