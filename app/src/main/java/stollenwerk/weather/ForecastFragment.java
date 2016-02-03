@@ -1,5 +1,6 @@
 package stollenwerk.weather;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,8 +73,9 @@ public class ForecastFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String weatherContent = adapter.getItem(position);
-                Log.v(LOG_TAG, weatherContent);
-                Toast.makeText(getActivity(), weatherContent, Toast.LENGTH_LONG).show();
+                Intent detailIntent = new Intent(getContext(), DetailActivity.class);
+                detailIntent.putExtra(Intent.EXTRA_TEXT, weatherContent);
+                startActivity(detailIntent);
             }
         });
         listView.setAdapter(adapter);
